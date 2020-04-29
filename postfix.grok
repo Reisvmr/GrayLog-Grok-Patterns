@@ -129,3 +129,10 @@ POSTFIX_LOCAL %{POSTFIX_KEYVALUE}|%{POSTFIX_WARNING}
 POSTFIX_VIRTUAL %{POSTFIX_SMTP_DELIVERY}
 POSTFIX_ERROR %{POSTFIX_ERROR_ANY}
 POSTFIX_POSTSUPER %{POSTFIX_POSTSUPER_ACTION}|%{POSTFIX_POSTSUPER_SUMMARY}
+
+# key value data
+KEY_VALUE_DATA_QMGR from=<%{EMAILADDRESS:send_from}>, size=%{INT:size}, nrcpt=%{INT:nrcpt}
+KEY_VALUE_DATA_SMTP_CLEANUP to=<%{EMAILADDRESS:send_to}>, relay=%{HOSTNAME:relay}\[%{IP:relay_ip}\]:25, delay=%{BASE16FLOAT:delay}, delays=%{BASE16FLOAT:delay_before_queue}/%{BASE16FLOAT:delay_in_queue}/%{BASE16FLOAT:delay_connection_setup}/%{BASE16FLOAT:delay_message_transmission}, dsn=%{BASE16FLOAT:delivery_status_notifications}.%{INT:UNWANTED}, status=%{STATUS_WORD:status}
+KEY_VALUE_DATA_SMTP_CONN_USE to=<%{EMAILADDRESS:send_to}>, relay=%{HOSTNAME:relay}\[%{IP:relay_ip}\]:25, conn_use=%{INT:conn_use}, delay=%{BASE16FLOAT:delay}, delays=%{BASE16FLOAT:delay_before_queue}/%{BASE16FLOAT:delay_in_queue}/%{BASE16FLOAT:delay_connection_setup}/%{BASE16FLOAT:delay_message_transmission}, dsn=%{BASE16FLOAT:delivery_status_notifications}.%{INT:UNWANTED}, status=%{STATUS_WORD:status}
+
+KEY_VALUE_DATA %{KEY_VALUE_DATA_SMTP_CLEANUP}|%{KEY_VALUE_DATA_SMTP_CONN_USE}|%{KEY_VALUE_DATA_QMGR}
