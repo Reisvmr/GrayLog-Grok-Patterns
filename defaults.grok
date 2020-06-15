@@ -74,3 +74,5 @@ WINDOWSMAC (?:(?:[A-Fa-f0-9]{2}-){5}[A-Fa-f0-9]{2})
 WINPATH (?>[A-Za-z]+:|\\)(?:\\[^\\?*]*)+
 WORD \b\w+\b
 YEAR (?>\d\d){1,2}
+
+PROJECT_ENV %{WORD:UNWANTED}=%{WORD:server_env}
