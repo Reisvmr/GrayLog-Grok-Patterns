@@ -1,0 +1,14 @@
+IPA_BIND %{IPA_BIND_NON_DN}|%{IPA_BIND_WITH_DN}
+IPA_BIND_NON_DN %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status} dn="" method=%{WORD:method} version=%{NUMBER:version} mech=%{WORD:mech}
+IPA_BIND_WITH_DN %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status} dn="%{GREEDYDATA:dn}" method=%{NUMBER:method} version=%{NUMBER:version}
+IPA_CLOSED %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} fd=%{NUMBER:fd} %{IPA_STATUS:ipa_status}
+IPA_CONNECTION %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} fd=%{NUMBER:fd} slot=%{NUMBER:slot} %{IPA_STATUS:ipa_status} from %{IP:from_ip} to %{IP:to_ip}
+IPA_EXT %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status} oid="%{GREEDYDATA:oid}" name="%{GREEDYDATA:name}"
+IPA_MESSAGE %{IPA_SRCH}|%{IPA_RESULT}|%{IPA_EXT}|%{IPA_BIND}|%{IPA_UNBIND}|%{IPA_CONNECTION}|%{IPA_CLOSED}
+IPA_RESULT %{IPA_RESULT_SHORT_SASL}|%{IPA_RESULT_SHORT}|%{IPA_RESULT_LONG}
+IPA_RESULT_LONG %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status} err=%{NUMBER:err} tag=%{NUMBER:tag} nentries=%{NUMBER:nentries} etime=%{BASE16FLOAT:etime} notes=%{GREEDYDATA:notes} pr_idx=%{NUMBER:pr_idx} pr_cookie=%{NUMBER:pr_cookie}
+IPA_RESULT_SHORT %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status} err=%{NUMBER:err} tag=%{NUMBER:tag} nentries=%{NUMBER:nentries} etime=%{BASE16FLOAT:etime}
+IPA_RESULT_SHORT_SASL %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status} err=%{NUMBER:err} tag=%{NUMBER:tag} nentries=%{NUMBER:nentries} etime=%{BASE16FLOAT:etime}, %{GREEDYDATA:sasl}
+IPA_SRCH %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status} base="%{GREEDYDATA:base}" scope=%{NUMBER:scope} filter="%{GREEDYDATA:filter}" attrs="%{GREEDYDATA:attrs}"
+IPA_STATUS (SRCH|RESULT|UNBIND|BIND|EXT|closed|connection)
+IPA_UNBIND %{HOSTNAME} %{WORD}: \[%{GREEDYDATA}\] conn=%{NUMBER:conn} op=%{NUMBER:op} %{IPA_STATUS:ipa_status}
